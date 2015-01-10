@@ -30,7 +30,7 @@ var Dropzone = React.createClass({
       draggin: false
     });
 
-    if (this.props.onDragLeave(e)) {
+    if (this.props.onDragLeave) {
       this.props.onDragLeave(e)
     }
 
@@ -44,8 +44,8 @@ var Dropzone = React.createClass({
     this.setState({
       draggin: true
     });
-    
-    if (this.props.onDragOver(e)) {
+
+    if (this.props.onDragOver) {
       this.props.onDragOver(e)
     }
 
