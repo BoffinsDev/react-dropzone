@@ -22,42 +22,50 @@ var Dropzone = React.createClass({
     </div>
   );
 
-},
+  },
 
-_handleDragLeave: function(e) {
+  _handleDragLeave: function(e) {
 
-  this.setState({
-    draggin: false
-  });
+    this.setState({
+      draggin: false
+    });
 
-},
+    if (this.props.onDragLeave(e)) {
+      this.props.onDragLeave(e)
+    }
 
-_handleDragOver: function(e) {
+  },
 
-  e.preventDefault();
-  e.dataTransfer.dropEffect = "copy";
+  _handleDragOver: function(e) {
 
-  this.setState({
-    draggin: true
-  });
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
 
-},
+    this.setState({
+      draggin: true
+    });
+    
+    if (this.props.onDragOver(e)) {
+      this.props.onDragOver(e)
+    }
 
-_handleDrop: function(e) {
+  },
 
-  e.preventDefault();
+  _handleDrop: function(e) {
 
-  this.setState({
-    draggin: false
-  });
+    e.preventDefault();
 
-  if (this.props.handler) {
-    this.props.handler(e.dataTransfer && e.dataTransfer.files);
-  } else {
-    console.error('No handler specified to accept the dropped file.');
+    this.setState({
+      draggin: false
+    });
+
+    if (this.props.handler) {
+      this.props.handler(e.dataTransfer && e.dataTransfer.files);
+    } else {
+      console.error('No handler specified to accept the dropped file.');
+    }
+
   }
-
-}
 
 });
 
